@@ -17,7 +17,9 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async signup(dto: AuthDto): Promise<Tokens> {
+  async signup(
+    dto: AuthDto,
+  ): Promise<{ uid: string; email: string; tokens: Tokens }> {
     const hashedPassword = await argon.hash(dto.password);
     const user = await this.userModel.create({
       email: dto.email,
@@ -27,10 +29,16 @@ export class AuthService {
     const tokens = await this.getTokens(user.id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
 
-    return tokens;
+    return {
+      tokens,
+      uid: user.id,
+      email: dto.email,
+    };
   }
 
-  async signin(dto: AuthDto): Promise<Tokens> {
+  async signin(
+    dto: AuthDto,
+  ): Promise<{ tokens: Tokens; uid: string; email: string }> {
     const user: any = await this.userModel.findOne({
       email: dto.email,
     });
@@ -43,7 +51,11 @@ export class AuthService {
     const tokens = await this.getTokens(user._id, user.email);
     await this.updateRtHash(user.id, tokens.refresh_token);
 
-    return tokens;
+    return {
+      tokens,
+      uid: user.id,
+      email: dto.email,
+    };
   }
 
   async logout(_id: number): Promise<boolean> {

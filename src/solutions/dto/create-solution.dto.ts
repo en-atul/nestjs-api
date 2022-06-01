@@ -6,7 +6,7 @@ export class CreateSolutionDto {
   @IsString()
   readonly name: string;
 
-  @ApiProperty({ description: 'Price' })
+  @ApiProperty({ description: 'salary' })
   @IsNumber()
-  readonly price: number;
+  readonly salary: number;
 }

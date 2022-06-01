@@ -7,7 +7,7 @@ export class Solution extends Document {
   name: string;
 
   @Prop()
-  price: number;
+  salary: number;
 }
 
 export const SolutionSchema = SchemaFactory.createForClass(Solution);
