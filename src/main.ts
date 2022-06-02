@@ -6,6 +6,7 @@ import { AppModule } from './app.module';
 var allowed_origins = [
   'https://localhost:3000',
   'http://localhost:3000',
+  'http://localhost:5000',
   undefined, //for test i.e. postman
 ];
 
