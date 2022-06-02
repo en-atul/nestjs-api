@@ -8,6 +8,9 @@ export class Solution extends Document {
 
   @Prop()
   salary: number;
+
+  @Prop()
+  location: string;
 }
 
 export const SolutionSchema = SchemaFactory.createForClass(Solution);

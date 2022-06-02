@@ -8,9 +8,11 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { Public } from 'src/common/decorators';
 import { AtGuard } from 'src/common/guards';
 import { CreateSolutionDto } from './dto/create-solution.dto';
 import { UpdateSolutionDto } from './dto/update-solution.dto';
@@ -27,11 +29,18 @@ export class SolutionsController {
     return this.solutionsService.create(body);
   }
 
-  @UseGuards(AtGuard)
+  // @UseGuards(AtGuard)
+  @Public()
   @Get()
   async findAll(@Res() response) {
     const solutionsRes = await this.solutionsService.findAll();
     return response.status(200).send(solutionsRes);
+  }
+
+  @Public()
+  @Get('search')
+  async search(@Query() query: { name: string; location: string }) {
+    return await this.solutionsService.search(query);
   }
 
   @UseGuards(AtGuard)

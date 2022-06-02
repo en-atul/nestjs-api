@@ -9,4 +9,8 @@ export class CreateSolutionDto {
   @ApiProperty({ description: 'salary' })
   @IsNumber()
   readonly salary: number;
+
+  @ApiProperty({ description: 'Location' })
+  @IsString()
+  readonly location: string;
 }

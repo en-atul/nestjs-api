@@ -16,6 +16,14 @@ export class SolutionsService {
     return this.solutionModel.find().exec();
   }
 
+  search({ name = '', location = '' }: { name: string; location: string }) {
+    return this.solutionModel
+      .find({
+        $or: [{ name: { $regex: new RegExp(name, "i") } }, { location: { $regex: new RegExp(location, "i") } }],
+      })
+      .exec();
+  }
+
   async findOne(id: string) {
     const solution = await this.solutionModel.findOne({ _id: id }).exec();
     if (!solution) {
