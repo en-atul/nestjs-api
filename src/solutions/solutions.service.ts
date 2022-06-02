@@ -17,9 +17,14 @@ export class SolutionsService {
   }
 
   search({ name = '', location = '' }: { name: string; location: string }) {
+    const query = [];
+    if (name !== '') query.push({ name: { $regex: new RegExp(name, 'i') } });
+    if (location !== '')
+      query.push({ location: { $regex: new RegExp(location, 'i') } });
+
     return this.solutionModel
       .find({
-        $or: [{ name: { $regex: new RegExp(name, "i") } }, { location: { $regex: new RegExp(location, "i") } }],
+        $or: query,
       })
       .exec();
   }
@@ -33,8 +38,8 @@ export class SolutionsService {
   }
 
   create(createSolutionDto: CreateSolutionDto) {
-    const coffee = new this.solutionModel(createSolutionDto);
-    return coffee.save();
+    const solutions = new this.solutionModel(createSolutionDto);
+    return solutions.save();
   }
 
   async update(id: string, updateSolutionDto: UpdateSolutionDto) {

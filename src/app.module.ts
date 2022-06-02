@@ -9,6 +9,7 @@ import { MailModule } from './mail/mail.module';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { join } from 'path';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { join } from 'path';
     SolutionsModule,
     AuthModule,
     MailModule,
+    ReviewModule,
   ],
   providers: [
     {
