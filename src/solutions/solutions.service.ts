@@ -38,13 +38,21 @@ export class SolutionsService {
   }
 
   create(createSolutionDto: CreateSolutionDto) {
-    const solutions = new this.solutionModel(createSolutionDto);
+    const solutions = new this.solutionModel({
+      ...createSolutionDto,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
     return solutions.save();
   }
 
   async update(id: string, updateSolutionDto: UpdateSolutionDto) {
     const existingSolution = await this.solutionModel
-      .findOneAndUpdate({ _id: id }, { $set: updateSolutionDto }, { new: true })
+      .findOneAndUpdate(
+        { _id: id },
+        { $set: { ...updateSolutionDto, updatedAt: new Date() } },
+        { new: true },
+      )
       .exec();
 
     if (!existingSolution) {

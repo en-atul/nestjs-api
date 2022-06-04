@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 @Schema()
 export class Review extends Document {
   @Prop()
-  name: string;
+  reviewer: string;
 
   @Prop()
   description: string;
@@ -13,7 +13,10 @@ export class Review extends Document {
   rating: number;
 
   @Prop()
-  addedAt: Date;
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export const ReviewSchema = SchemaFactory.createForClass(Review);

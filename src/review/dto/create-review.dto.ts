@@ -2,15 +2,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 
 export class CreateReviewDto {
-  @ApiProperty({ description: 'Name' })
+  @ApiProperty({ description: 'Reviewer Name' })
   @IsString()
-  readonly name: string;
+  readonly reviewer: string;
 
   @ApiProperty({ description: 'Review Desccription' })
-  @IsNumber()
+  @IsString()
   readonly description: string;
 
-  @ApiProperty({ description: 'Reating' })
+  @ApiProperty({ description: 'Rating' })
   @IsNumber()
   readonly rating: number;
 }

@@ -2,9 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString } from 'class-validator';
 
 export class CreateSolutionDto {
-  @ApiProperty({ description: 'Name' })
+  @ApiProperty({ description: 'Job title' })
   @IsString()
-  readonly name: string;
+  readonly title: string;
 
   @ApiProperty({ description: 'salary' })
   @IsNumber()
@@ -13,4 +13,8 @@ export class CreateSolutionDto {
   @ApiProperty({ description: 'Location' })
   @IsString()
   readonly location: string;
+
+  @ApiProperty({ description: 'Job Descriptionn' })
+  @IsString()
+  readonly description: string;
 }

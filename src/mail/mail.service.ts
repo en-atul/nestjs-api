@@ -1,19 +1,21 @@
-import { MailerService } from "@nestjs-modules/mailer";
-import { Injectable } from "@nestjs/common";
+import { MailerService } from '@nestjs-modules/mailer';
+import { Injectable } from '@nestjs/common';
+import { ContactUsDto } from './dto/email.dto';
 
 @Injectable()
 export class MailService {
-    constructor(private mailerService: MailerService) {}
+  constructor(private mailerService: MailerService) {}
 
-    async sendMail(email: string, name: string) {
-        console.log(email)
-        await this.mailerService.sendMail({
-            to: email,
-            subject: 'Greeting from NestJS NodeMailer',
-            template: '/email',
-            context: {
-                name: name
-            }
-        })
-    }
+  async sendMail({ email, ...rest }: ContactUsDto) {
+    await this.mailerService.sendMail({
+      to: email,
+      subject: 'Contact Us',
+      template: '/email',
+      context: {
+        email,
+        ...rest,
+      },
+    });
+    return 'email sent successfully!';
+  }
 }

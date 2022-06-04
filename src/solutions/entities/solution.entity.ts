@@ -4,13 +4,22 @@ import { Document } from 'mongoose';
 @Schema()
 export class Solution extends Document {
   @Prop()
-  name: string;
+  title: string;
 
   @Prop()
   salary: number;
 
   @Prop()
   location: string;
+
+  @Prop()
+  description: string;
+
+  @Prop()
+  createdAt: Date;
+
+  @Prop()
+  updatedAt: Date;
 }
 
 export const SolutionSchema = SchemaFactory.createForClass(Solution);

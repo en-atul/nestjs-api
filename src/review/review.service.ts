@@ -25,13 +25,21 @@ export class ReviewService {
   }
 
   create(CreateReviewDto: CreateReviewDto) {
-    const review = new this.reviewModel(CreateReviewDto);
+    const review = new this.reviewModel({
+      ...CreateReviewDto,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
     return review.save();
   }
 
   async update(id: string, UpdateReviewDto: UpdateReviewDto) {
     const existingReview = await this.reviewModel
-      .findOneAndUpdate({ _id: id }, { $set: UpdateReviewDto }, { new: true })
+      .findOneAndUpdate(
+        { _id: id },
+        { $set: { ...UpdateReviewDto, updatedAt: new Date() } },
+        { new: true },
+      )
       .exec();
 
     if (!existingReview) {

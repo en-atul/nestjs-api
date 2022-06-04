@@ -6,9 +6,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common/guards';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailModule } from './mail/mail.module';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { MailerModule } from '@nestjs-modules/mailer';
-import { join } from 'path';
 import { ReviewModule } from './review/review.module';
 
 @Module({
@@ -26,30 +23,7 @@ import { ReviewModule } from './review/review.module';
       }),
       inject: [ConfigService],
     }),
-    MailerModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => ({
-        transport: {
-          host: config.get('EMAIL_HOST'),
-          secure: false,
-          auth: {
-            user: config.get('EMAIL_USER'),
-            pass: config.get('EMAIL_PASSWORD'),
-          },
-        },
-        defaults: {
-          from: '<sendgrid_from_email_address>',
-        },
-        template: {
-          dir: join(__dirname, './templates'),
-          adapter: new HandlebarsAdapter(),
-          options: {
-            strict: true,
-          },
-        },
-      }),
-      inject: [ConfigService],
-    }),
+    
     SolutionsModule,
     AuthModule,
     MailModule,
