@@ -7,6 +7,9 @@ import { AtGuard } from './common/guards';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailModule } from './mail/mail.module';
 import { ReviewModule } from './review/review.module';
+import { FeedController } from './feed/feed.controller';
+import { FeedService } from './feed/feed.service';
+import { FeedModule } from './feed/feed.module';
 
 @Module({
   imports: [
@@ -28,12 +31,15 @@ import { ReviewModule } from './review/review.module';
     AuthModule,
     MailModule,
     ReviewModule,
+    FeedModule,
   ],
   providers: [
     {
       provide: APP_GUARD,
       useClass: AtGuard,
     },
+    FeedService,
   ],
+  controllers: [FeedController],
 })
 export class AppModule {}
