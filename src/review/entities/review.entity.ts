@@ -7,6 +7,12 @@ export class Review extends Document {
   reviewer: string;
 
   @Prop()
+  position: string;
+
+  @Prop()
+  company: string;
+
+  @Prop()
   description: string;
 
   @Prop()

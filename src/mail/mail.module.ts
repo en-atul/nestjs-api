@@ -19,7 +19,7 @@ import { MailService } from './mail.service';
         },
       },
       defaults: {
-        from: 'info@channlworks.com',
+        from: config.get('EMAIL_FROM'),
       },
       template: {
         dir: join(__dirname, './templates'),

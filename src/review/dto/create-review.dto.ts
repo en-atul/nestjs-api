@@ -6,9 +6,19 @@ export class CreateReviewDto {
   @IsString()
   readonly reviewer: string;
 
-  @ApiProperty({ description: 'Review Desccription' })
+  @ApiProperty({ description: 'Position' })
+  @IsString()
+  readonly position: string;
+
+  @ApiProperty({ description: 'Company' })
+  @IsString()
+  readonly company: string;
+
+
+  @ApiProperty({ description: 'Review Description' })
   @IsString()
   readonly description: string;
+
 
   @ApiProperty({ description: 'Rating' })
   @IsNumber()

@@ -1,12 +1,12 @@
-import { Controller, Get, Res, UseGuards } from '@nestjs/common';
-import { AtGuard } from 'src/common/guards';
+import { Controller, Get, Res } from '@nestjs/common';
+import { Public } from 'src/common/decorators';
 import { FeedService } from './feed.service';
 
 @Controller('feed')
 export class FeedController {
     constructor(private readonly feedService: FeedService) {}
 
-    @UseGuards(AtGuard)
+    @Public()
     @Get()
     async findAll(@Res() response) {
       const reviewRes = await this.feedService.findAll();
